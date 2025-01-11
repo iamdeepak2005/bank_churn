@@ -63,7 +63,7 @@ Start the React development server:
 This will start the frontend server and open the app in your browser (usually at http://localhost:3000).
 
 Backend Setup
-To set up the backend (Python with Flask/FastAPI), follow these steps:
+To set up the backend (Python with Django), follow these steps:
 
 Navigate to the backend directory:
 
@@ -82,7 +82,7 @@ Install the required Python dependencies:
 Start the backend server:
 
     ```bash
-    python app.py  # Or use any script for starting your server, depending on the framework (Flask/FastAPI)
+    python app.py  # Or use any script for starting your server, depending on the framework (Django)
 This will start the backend server (usually at http://localhost:5000).
 
 # Gemini Integration
