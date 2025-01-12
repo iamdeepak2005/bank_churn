@@ -37,5 +37,5 @@ urlpatterns = [
     path('verify/',verify_pin),
     path('bank/user/',(main_views.handle_user_information)),
     path('bank/churn/',(main_views.handle_churn_information)),
-
+    # path('suggest/',speech)
 ]

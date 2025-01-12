@@ -5,6 +5,8 @@ import numpy as np
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+from .suggestion import *
+
 @csrf_exempt
 def predict_churn(request):
     if request.method == 'POST':
@@ -49,6 +51,8 @@ def predict_churn(request):
                 data['avg_utilization_ratio'] = float(data['avg_utilization_ratio'])
             except ValueError as e:
                 return JsonResponse({'error': f'Invalid value format: {str(e)}'}, status=400)
+            
+            gem=data
 
             # Map categorical features to their corresponding numerical values
             data['gender'] = 0 if data['gender'] == 'Female' else 1  # Male -> 1, Female -> 0
@@ -118,9 +122,13 @@ def predict_churn(request):
 
             # Ensure the prediction is a regular Python data type (int or float)
             prediction_value = int(prediction[0]) if isinstance(prediction[0], (np.int64, np.float64)) else prediction[0]
-
+            response=''
+            if prediction_value==0:
+                response=leaving(gem)
+            elif prediction_value==1:
+                response=inplace(gem)
             # Return the prediction as a JSON response
-            return JsonResponse({'prediction': prediction_value})
+            return JsonResponse({'prediction': prediction_value,'suggestion':response})
 
         except Exception as e:
             return JsonResponse({'error': f'Error occurred: {str(e)}'}, status=400)
