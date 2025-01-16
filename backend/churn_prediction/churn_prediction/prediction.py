@@ -50,8 +50,25 @@ def predict_churn(request):
                 data['total_ct_chng_q4_q1'] = float(data['total_ct_chng_q4_q1'])
                 data['avg_utilization_ratio'] = float(data['avg_utilization_ratio'])
             except ValueError as e:
-                return JsonResponse({'error': f'Invalid value format: {str(e)}'}, status=400)
-            
+                for field in [
+                    'customer_age', 'dependent_count', 'months_on_book', 'total_relationship_count', 
+                    'months_inactive_12_mon', 'contacts_count_12_mon', 'credit_limit', 
+                    'total_revolving_bal', 'avg_open_to_buy', 'total_amt_chng_q4_q1', 
+                    'total_trans_amt', 'total_trans_ct', 'total_ct_chng_q4_q1', 'avg_utilization_ratio'
+                ]:
+                    try:
+                        # Attempt to convert each field individually to identify the problematic one
+                        if field in ['customer_age', 'credit_limit', 'total_revolving_bal', 'avg_open_to_buy',
+                                     'total_amt_chng_q4_q1', 'total_trans_amt', 'total_ct_chng_q4_q1', 'avg_utilization_ratio']:
+                            float(data[field])
+                        elif field in ['dependent_count', 'months_on_book', 'total_relationship_count', 
+                                       'months_inactive_12_mon', 'contacts_count_12_mon', 'total_trans_ct']:
+                            int(data[field])
+                    except ValueError:
+                        return JsonResponse({
+                            'error': f'Invalid value for {field}: {data.get(field)}. Ensure it is of the correct type.'
+                        }, status=400)
+
             gem=data
 
             # Map categorical features to their corresponding numerical values

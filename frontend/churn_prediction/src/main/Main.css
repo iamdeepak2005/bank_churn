@@ -1,0 +1,15 @@
+.dashboard{display: flex;
+flex-direction: row;
+gap: 20px;}
+
+.span{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+label{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+}

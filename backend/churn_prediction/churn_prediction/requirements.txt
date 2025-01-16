@@ -6,3 +6,4 @@ numpy==2.0.2
 djangorestframework
 cryptography
 google-generativeai
+django-cors-headers
