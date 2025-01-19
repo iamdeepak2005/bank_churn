@@ -3,7 +3,7 @@ import google.generativeai as genai
 import os
 from django.http import JsonResponse
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'c:\Users\deepa\Downloads\orbital-stream-426213-r2-6040f858ab8b.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'CREDENTAILS_PATH_HERE'
 
 # Define a well-structured and specific prompt for bank churn analysis
 PROMPT_TEMPLATE = """
@@ -68,9 +68,9 @@ JSON Output Expected:
 
 # def super(request):
 #     if 
+api_key = 'YOUR_API_KEY_HERE'
 
 def leaving(inp):
-    api_key = 'AIzaSyCeX_Kj_ztYr7xWmR1DwQp5MqLP3A2-J7U'
     print("Input data:", inp)
     
     genai.configure(api_key=api_key)
@@ -95,7 +95,6 @@ def leaving(inp):
         raise JsonResponse(status_code=500,  detail=f"Error processing customer input: {str(e)}")
     
 def inplace(inp):
-    api_key = 'AIzaSyCeX_Kj_ztYr7xWmR1DwQp5MqLP3A2-J7U'
     print("Input data:", inp)
     
     genai.configure(api_key=api_key)
